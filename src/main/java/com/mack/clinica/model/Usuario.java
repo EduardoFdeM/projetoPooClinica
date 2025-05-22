@@ -1,5 +1,6 @@
 package com.mack.clinica.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -15,6 +16,7 @@ public class Usuario {
     private String tipo; // paciente, admin, medico
     private String senha; // Only for authentication, not usually for display
     private LocalDateTime createdAt;
+    private LocalDate dataNascimento; // Data de nascimento do usuário
 
     // Construtor padrão
     public Usuario() {
@@ -22,7 +24,7 @@ public class Usuario {
 
     // Construtor com todos os campos (exceto senha para evitar exposição)
     public Usuario(int id, String nome, String email, String cpf, String celular, String tipo,
-            LocalDateTime createdAt) {
+            LocalDateTime createdAt, LocalDate dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -30,6 +32,7 @@ public class Usuario {
         this.celular = celular;
         this.tipo = tipo;
         this.createdAt = createdAt;
+        this.dataNascimento = dataNascimento;
     }
 
     // Getters
@@ -65,10 +68,22 @@ public class Usuario {
         return createdAt;
     }
 
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
     public String getFormattedCreatedAt() {
         if (this.createdAt != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             return this.createdAt.format(formatter);
+        }
+        return "";
+    }
+
+    public String getFormattedDataNascimento() {
+        if (this.dataNascimento != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return this.dataNascimento.format(formatter);
         }
         return "";
     }
@@ -104,6 +119,31 @@ public class Usuario {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    // Setter para String (útil ao preencher a partir de formulários)
+    public void setDataNascimentoFromString(String dataNascimentoString) {
+        if (dataNascimentoString != null && !dataNascimentoString.isEmpty()) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                this.dataNascimento = LocalDate.parse(dataNascimentoString, formatter);
+            } catch (Exception e) {
+                // Tenta com o formato brasileiro
+                try {
+                    DateTimeFormatter alternativeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    this.dataNascimento = LocalDate.parse(dataNascimentoString, alternativeFormatter);
+                } catch (Exception ex) {
+                    System.err.println("Formato de data inválido para dataNascimento: " + dataNascimentoString);
+                    this.dataNascimento = null;
+                }
+            }
+        } else {
+            this.dataNascimento = null;
+        }
     }
 
     // Setter para String (útil ao ler do banco)
