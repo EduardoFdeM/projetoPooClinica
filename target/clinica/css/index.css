@@ -28,18 +28,14 @@ body {
 .logo {
     margin-bottom: 25px;
     text-align: center;
-    width: 100%;
 }
 
 .logo h1 {
     color: #2c3e50;
-    margin: 0 auto;
+    margin: 0;
     font-size: 28px;
     font-weight: 600;
     letter-spacing: -0.5px;
-    text-align: center;
-    width: 100%;
-    display: block;
 }
 
 h2 {
@@ -48,25 +44,11 @@ h2 {
     font-weight: 500;
     font-size: 22px;
     margin-top: 0;
-    text-align: center;
-    width: 100%;
-    display: block;
-}
-
-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .input-group {
     margin-bottom: 25px;
-    width: 100%;
-    max-width: 320px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: left;
 }
 
 label {
@@ -75,13 +57,10 @@ label {
     font-weight: 500;
     color: #34495e;
     font-size: 15px;
-    text-align: center;
-    width: 100%;
 }
 
 input {
     width: 100%;
-    max-width: 320px;
     padding: 15px 16px;
     border: 2px solid #e1e8ed;
     border-radius: 8px;
@@ -89,7 +68,6 @@ input {
     transition: all 0.3s ease;
     box-sizing: border-box;
     background-color: #f8f9fa;
-    display: block;
 }
 
 input::placeholder {
@@ -107,7 +85,6 @@ input:focus {
 
 button {
     width: 100%;
-    max-width: 320px;
     padding: 16px;
     background-color: #3498db;
     color: white;
@@ -120,7 +97,6 @@ button {
     margin-top: 10px;
     margin-bottom: 25px;
     box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-    display: block;
 }
 
 button:hover {
@@ -143,21 +119,14 @@ button:active {
     border: 1px solid #f5b7b1;
     box-shadow: 0 2px 5px rgba(192, 57, 43, 0.1);
     text-align: center;
-    width: 100%;
-    max-width: 320px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
 }
 
 .info-text {
     color: #7f8c8d;
     font-size: 14px;
-    margin: 0 auto;
+    margin: 0;
     text-align: center;
     line-height: 1.5;
-    width: 100%;
-    display: block;
 }
 
 /* Responsividade */
@@ -176,24 +145,17 @@ button:active {
         font-size: 20px;
     }
 
-    .input-group {
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
-
-    input {
-        max-width: 100%;
-        padding: 12px 14px;
-        font-size: 15px;
-    }
-
     button {
-        max-width: 100%;
         padding: 14px;
         font-size: 15px;
     }
 
-    .error-message {
-        max-width: 100%;
+    input {
+        padding: 12px 14px;
+        font-size: 15px;
+    }
+
+    .input-group {
+        margin-bottom: 20px;
     }
 }

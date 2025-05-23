@@ -32,10 +32,8 @@ public class AgendarConsultaServlet extends HttpServlet {
             return;
         }
 
-        // Obtém o caminho real do projeto
-        String realPathBase = request.getServletContext().getRealPath("/");
-        // Instancia o DAO passando o caminho
-        AgendarConsultaDAO dao = new AgendarConsultaDAO(realPathBase);
+        // Instancia o DAO passando o ServletContext
+        AgendarConsultaDAO dao = new AgendarConsultaDAO(getServletContext());
         // Busca a lista de médicos
         List<Usuario> medicos = dao.listarMedicos();
         System.out.println("Médicos encontrados: " + (medicos != null ? medicos.size() : 0));
@@ -68,15 +66,12 @@ public class AgendarConsultaServlet extends HttpServlet {
             // Pega o paciente_id da sessão
             int pacienteId = (Integer) session.getAttribute("id");
 
-            // Conecta no banco
-            String realPathBase = request.getServletContext().getRealPath("/");
-
             System.out.println("Paciente ID: " + pacienteId);
             System.out.println("Profissional ID: " + profissionalId);
             System.out.println("Data e Hora: " + dataHora);
             System.out.println("Observações: " + (observacoes != null ? observacoes : "Não fornecidas"));
 
-            AgendarConsultaDAO dao = new AgendarConsultaDAO(realPathBase);
+            AgendarConsultaDAO dao = new AgendarConsultaDAO(getServletContext());
 
             // Agenda a consulta com as observações
             boolean sucesso = dao.agendarConsulta(pacienteId, profissionalId, dataHora, observacoes);

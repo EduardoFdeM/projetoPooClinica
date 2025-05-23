@@ -3,7 +3,7 @@ package com.mack.clinica.controller;
 import java.io.IOException;
 
 import com.mack.clinica.model.Usuario;
-import com.mack.clinica.model.UsuarioDAO;
+import com.mack.clinica.dao.UsuarioDAO;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -40,6 +40,8 @@ public class LoginActionServlet extends HttpServlet {
                 response.sendRedirect("admin_dashboard");
             } else if ("paciente".equalsIgnoreCase(usuario.getTipo())) {
                 response.sendRedirect("paciente_dashboard");
+            } else if ("medico".equalsIgnoreCase(usuario.getTipo())) {
+                response.sendRedirect("medico_dashboard");
             } else {
                 response.sendRedirect("index.jsp?erro=tipo");
             }

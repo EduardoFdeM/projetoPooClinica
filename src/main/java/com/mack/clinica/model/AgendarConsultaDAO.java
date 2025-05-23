@@ -7,20 +7,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mack.clinica.util.DatabaseConnection;
+import com.mack.clinica.util.DBUtil;
+import jakarta.servlet.ServletContext;
 
 public class AgendarConsultaDAO {
 
-    private String realPathBase;
+    private ServletContext context;
 
-    public AgendarConsultaDAO(String realPathBase) {
-        this.realPathBase = realPathBase;
+    public AgendarConsultaDAO(ServletContext context) {
+        this.context = context;
     }
 
     public boolean agendarConsulta(int pacienteId, int profissionalId, String dataHora, String observacoes) {
         String sql = "INSERT INTO consultas (paciente_id, profissional_id, data_hora, status, observacoes) VALUES (?, ?, ?, 'agendada', ?)";
 
-        try (Connection conn = DatabaseConnection.getConnection(realPathBase)) {
+        try (Connection conn = DBUtil.getConnection(this.context)) {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, pacienteId);
             stmt.setInt(2, profissionalId);
@@ -40,7 +41,7 @@ public class AgendarConsultaDAO {
         List<Usuario> medicos = new ArrayList<>();
         String sql = "SELECT id, nome FROM usuarios WHERE tipo = 'medico'";
 
-        try (Connection conn = DatabaseConnection.getConnection(realPathBase);
+        try (Connection conn = DBUtil.getConnection(this.context);
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 ResultSet rs = stmt.executeQuery()) {
 

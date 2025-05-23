@@ -31,6 +31,7 @@ pageEncoding="UTF-8"%> <%@ page session="true" %>
         width: 90%;
         max-width: 450px;
         transition: all 0.3s ease;
+        text-align: center;
       }
 
       .logout-container:hover {
@@ -40,6 +41,7 @@ pageEncoding="UTF-8"%> <%@ page session="true" %>
 
       .logo {
         margin-bottom: 25px;
+        text-align: center;
       }
 
       .logo h1 {
@@ -48,6 +50,7 @@ pageEncoding="UTF-8"%> <%@ page session="true" %>
         font-size: 28px;
         font-weight: 600;
         letter-spacing: -0.5px;
+        text-align: center;
       }
 
       h2 {
@@ -56,6 +59,7 @@ pageEncoding="UTF-8"%> <%@ page session="true" %>
         margin-bottom: 20px;
         font-size: 22px;
         font-weight: 500;
+        text-align: center;
       }
 
       p {
@@ -63,6 +67,12 @@ pageEncoding="UTF-8"%> <%@ page session="true" %>
         font-size: 16px;
         margin-bottom: 30px;
         line-height: 1.5;
+        text-align: center;
+      }
+
+      .loader-container {
+        text-align: center;
+        margin-bottom: 25px;
       }
 
       .loader {
@@ -73,7 +83,6 @@ pageEncoding="UTF-8"%> <%@ page session="true" %>
         border-radius: 50%;
         border-top-color: #3498db;
         animation: spin 1s ease-in-out infinite;
-        margin-bottom: 25px;
       }
 
       @keyframes spin {
@@ -89,6 +98,7 @@ pageEncoding="UTF-8"%> <%@ page session="true" %>
         font-weight: 500;
         font-size: 14px;
         transition: all 0.3s ease;
+        text-align: center;
       }
 
       .redirect-link:hover {
@@ -132,7 +142,9 @@ pageEncoding="UTF-8"%> <%@ page session="true" %>
         login...
       </p>
 
-      <div class="loader"></div>
+      <div class="loader-container">
+        <div class="loader"></div>
+      </div>
 
       <a
         href="${pageContext.request.contextPath}/index.jsp"

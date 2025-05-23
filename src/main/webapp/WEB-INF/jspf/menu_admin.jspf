@@ -2,12 +2,24 @@
 <!-- Menu de Navegação do Administrador -->
 <div class="navbar">
     <div class="nav-links">
-        <a href="${pageContext.request.contextPath}/admin_dashboard">Home</a>
-        <a href="${pageContext.request.contextPath}/pacientes">Cadastro de Pacientes</a>
-        <a href="${pageContext.request.contextPath}/medicos">Cadastro de Médicos</a>
-        <a href="${pageContext.request.contextPath}/consultar_agenda">Consultar Agenda</a>
-        <a href="${pageContext.request.contextPath}/ficha_clinica">Ficha Clínica</a>
-        <a href="${pageContext.request.contextPath}/logout" class="logout-link">Logout</a>
+        <a href="${pageContext.request.contextPath}/admin_dashboard">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="${pageContext.request.contextPath}/pacientes">
+            <i class="fas fa-users"></i> Pacientes
+        </a>
+        <a href="${pageContext.request.contextPath}/medicos">
+            <i class="fas fa-user-md"></i> Médicos
+        </a>
+        <a href="${pageContext.request.contextPath}/consultar_agenda">
+            <i class="fas fa-calendar-check"></i> Agenda
+        </a>
+        <a href="${pageContext.request.contextPath}/ficha_clinica">
+            <i class="fas fa-file-medical"></i> Fichas Clínicas
+        </a>
+        <a href="${pageContext.request.contextPath}/logout" class="logout-link">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
     </div>
 </div>
 
@@ -33,6 +45,9 @@
         border-radius: 4px;
         transition: background-color 0.3s;
         font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
     
     .nav-links a:hover {

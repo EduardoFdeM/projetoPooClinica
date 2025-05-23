@@ -11,9 +11,11 @@ public class Consulta {
   private String status;
   private String observacoes;
 
-  // Campo adicional para nome do profissional (não está na tabela consultas, virá
-  // de um JOIN)
+  // Campos adicionais para exibição (não estão na tabela consultas, virão de um
+  // JOIN)
   private String nomeProfissional;
+  private String nomePaciente;
+  private String nomeMedico;
 
   public Consulta() {
   }
@@ -47,12 +49,37 @@ public class Consulta {
     return nomeProfissional;
   }
 
+  public String getNomePaciente() {
+    return nomePaciente;
+  }
+
+  public String getNomeMedico() {
+    return nomeMedico;
+  }
+
   public String getFormattedDataHora() {
     if (this.dataHora != null) {
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
       return this.dataHora.format(formatter);
     }
     return "Data não definida";
+  }
+
+  // Métodos para compatibilidade com JSPs
+  public String getDataConsultaFormatada() {
+    if (this.dataHora != null) {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      return this.dataHora.format(formatter);
+    }
+    return "Data não definida";
+  }
+
+  public String getHorario() {
+    if (this.dataHora != null) {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+      return this.dataHora.format(formatter);
+    }
+    return "Horário não definido";
   }
 
   // Setters
@@ -111,5 +138,13 @@ public class Consulta {
 
   public void setNomeProfissional(String nomeProfissional) {
     this.nomeProfissional = nomeProfissional;
+  }
+
+  public void setNomePaciente(String nomePaciente) {
+    this.nomePaciente = nomePaciente;
+  }
+
+  public void setNomeMedico(String nomeMedico) {
+    this.nomeMedico = nomeMedico;
   }
 }

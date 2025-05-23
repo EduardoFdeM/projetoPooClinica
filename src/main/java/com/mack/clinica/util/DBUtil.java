@@ -3,6 +3,7 @@ package com.mack.clinica.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DBUtil {
   // O caminho para o banco de dados SQLite.
@@ -30,6 +31,8 @@ public class DBUtil {
     Connection conn = null;
     try {
       conn = DriverManager.getConnection(url);
+      // Cria a tabela prontuarios se ela não existir
+      createProntuariosTableIfNotExists(conn);
       // System.out.println("Conexão com SQLite estabelecida com sucesso."); // Para
       // debug
     } catch (SQLException e) {
@@ -38,6 +41,52 @@ public class DBUtil {
       throw e; // Re-lança a exceção para que a camada superior possa tratar
     }
     return conn;
+  }
+
+  private static void createProntuariosTableIfNotExists(Connection conn) {
+    try (Statement stmt = conn.createStatement()) {
+      // Primeiro, vamos verificar se a tabela existe e tem a estrutura correta
+      // Se houver erro, vamos recriar a tabela
+      try {
+        // Tenta fazer uma consulta simples para verificar se as colunas existem
+        stmt.executeQuery(
+            "SELECT id, paciente_id, profissional_id, data_consulta, horario_consulta, anamnese, exame_fisico, hipotese_diagnostica, conduta_medica, observacoes FROM prontuarios LIMIT 1")
+            .close();
+        System.out.println("Tabela prontuarios já existe com estrutura correta.");
+      } catch (SQLException e) {
+        // Se der erro, a tabela não existe ou tem estrutura incorreta
+        System.out.println("Tabela prontuarios não existe ou tem estrutura incorreta. Recriando...");
+
+        // Remove a tabela se existir
+        try {
+          stmt.execute("DROP TABLE IF EXISTS prontuarios");
+        } catch (SQLException dropError) {
+          System.err.println("Erro ao remover tabela prontuarios: " + dropError.getMessage());
+        }
+
+        // Cria a tabela com a estrutura correta
+        String createTableSQL = "CREATE TABLE prontuarios (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "paciente_id INTEGER NOT NULL, " +
+            "profissional_id INTEGER NOT NULL, " +
+            "data_consulta TEXT NOT NULL, " +
+            "horario_consulta TEXT, " +
+            "anamnese TEXT, " +
+            "exame_fisico TEXT, " +
+            "hipotese_diagnostica TEXT, " +
+            "conduta_medica TEXT, " +
+            "observacoes TEXT, " +
+            "FOREIGN KEY (paciente_id) REFERENCES usuarios(id), " +
+            "FOREIGN KEY (profissional_id) REFERENCES usuarios(id)" +
+            ")";
+
+        stmt.execute(createTableSQL);
+        System.out.println("Tabela prontuarios criada com sucesso com estrutura correta.");
+      }
+    } catch (SQLException e) {
+      System.err.println("Erro ao verificar/criar tabela prontuarios: " + e.getMessage());
+      e.printStackTrace();
+    }
   }
 
   public static void closeConnection(Connection conn) {
