@@ -17,9 +17,6 @@
         <a href="${pageContext.request.contextPath}/ficha_clinica">
             <i class="fas fa-file-medical"></i> Fichas Clínicas
         </a>
-        <a href="${pageContext.request.contextPath}/relatorios">
-            <i class="fas fa-chart-bar"></i> Relatórios
-        </a>
         <a href="${pageContext.request.contextPath}/logout" class="logout-link">
             <i class="fas fa-sign-out-alt"></i> Logout
         </a>
