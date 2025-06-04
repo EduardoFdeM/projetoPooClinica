@@ -2,6 +2,13 @@
 
 Este projeto consiste em um sistema web para agendamento e gestão de consultas médicas para clínicas, desenvolvido com tecnologias Java EE, seguindo a arquitetura MVC (Model-View-Controller).
 
+![Print da Tela de Login](assets/images/login.jpeg)
+![Print do Painel do Admin](assets/images/painel_admin.jpeg)
+![Print do Painel Médico](assets/images/painel_medico.jpeg)
+![Print do Painel do Paciente](assets/images/painel_paciente.jpeg)
+![Print da Agenda dos Pacientes](assets/images/agenda_paciente.jpeg)
+![Print da Ficha Clínica](assets/images/ficha_clinica.jpeg)
+
 ## Tecnologias Utilizadas
 
 - **Java Servlets**: Para processamento de requisições no servidor
